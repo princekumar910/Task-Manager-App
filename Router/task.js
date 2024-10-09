@@ -1,15 +1,16 @@
 const express = require('express') ;
 const route = express.Router() ;
+const {asyncWrapper} = require('../middleware/async') ; 
 const {deleteTask , getTask , getAllTasks , updateTask , createTask} = require('../controllers/task')
 
-route.get('/' , getAllTasks) ;
+route.get('/' , asyncWrapper(getAllTasks)) ;
 
-route.post('/' , createTask) ;
+route.post('/' , asyncWrapper(createTask)) ;
 
-route.get('/:id' , getTask) ;
+route.get('/:id' , asyncWrapper(getTask)) ;
 
-route.patch('/:id' , updateTask) ;
+route.patch('/:id' , asyncWrapper(updateTask)) ;
 
-route.delete('/:id' ,deleteTask ) ;
+route.delete('/:id' ,asyncWrapper(deleteTask) ) ;
 
 module.exports = route ;

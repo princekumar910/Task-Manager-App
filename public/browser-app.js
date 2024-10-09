@@ -70,13 +70,18 @@ formDOM.addEventListener('submit', async (e) => {
   const name = taskInputDOM.value
 
   try {
-    await axios.post('/api/v1/tasks', { name })
+    
+    let result = await axios.post('/api/v1/tasks', { name })
+    console.log(result.data.message)
+    let data = result.data.message ;
+
     showTasks()
     taskInputDOM.value = ''
     formAlertDOM.style.display = 'block'
-    formAlertDOM.textContent = `success, task added`
-    formAlertDOM.classList.add('text-success')
-  } catch (error) {
+    formAlertDOM.textContent = data 
+    formAlertDOM.classList.add('text-success')}
+    
+  catch (error) {
     formAlertDOM.style.display = 'block'
     formAlertDOM.innerHTML = `error, please try again`
   }
